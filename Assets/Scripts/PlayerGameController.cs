@@ -12,7 +12,9 @@ public class PlayerGameController : MonoBehaviour
         {
             Moneys.Add(other.gameObject);
             other.gameObject.transform.SetParent(transform);
-            other.gameObject.transform.position = spawnPoint.position + new Vector3(0, 0, 1) * Moneys.Count; 
+            other.gameObject.transform.position = spawnPoint.position + new Vector3(0, 0, 0.5f) * Moneys.Count;
+            //other.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
+
 }
