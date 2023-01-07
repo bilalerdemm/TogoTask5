@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerGameController : MonoBehaviour
@@ -24,8 +25,15 @@ public class PlayerGameController : MonoBehaviour
         if (other.gameObject.CompareTag("Collect"))
         {
             other.gameObject.transform.parent = transform.parent.GetChild(0).transform;
+
+
+            Debug.Log(other.gameObject.name);
+            //other.gameObject.transform.AddComponent<Rigidbody>();
+
+
             StackList.Add(other.gameObject);
             StackList[StackList.Count - 1].transform.position += new Vector3(0, 0, StackList.Count * .5f);
+            score++;
 
             if (StackList.Count == 1)
             {
@@ -81,6 +89,10 @@ public class PlayerGameController : MonoBehaviour
     IEnumerator CubeRemover()
     {
         yield return new WaitForSeconds(1f);
+
+    }
+    public void AddCubeToList()
+    {
 
     }
 }
