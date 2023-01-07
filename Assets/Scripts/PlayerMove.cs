@@ -19,9 +19,9 @@ public class PlayerMove : MonoBehaviour, IDragHandler
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        Vector3 pos = character.position;
+        Vector3 pos = character.localPosition;
         pos.x = Mathf.Clamp(pos.x + (eventData.delta.x / 100), -4, 4);
-        character.position = pos;
+        character.localPosition = pos;
         /*
         Quaternion rot = child.rotation;
         rot.y = Mathf.Clamp(rot.y + (eventData.delta.x / 500), -2f, 2f);
@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour, IDragHandler
         if (start == true)
         {
             playerAnim.SetBool("isRunning", true);
-            myPlayer.gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
+            //myPlayer.gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
         }
     }
 
