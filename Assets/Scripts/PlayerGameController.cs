@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerGameController : MonoBehaviour
 {
+    public Animator playerAnim;
+    public bool start =false;
+
     public List<GameObject> StackList = new List<GameObject>();
     public Transform spawnPoint;
     public bool isCube = true;
@@ -23,7 +26,17 @@ public class PlayerGameController : MonoBehaviour
 
     private void Update()
     {
-        transform.parent.transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            start = true;
+        }
+        if (start == true)
+        {
+            playerAnim.SetBool("isRunning", true);
+            transform.parent.transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
+            //myPlayer.gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +45,8 @@ public class PlayerGameController : MonoBehaviour
         {
             AddCubeToList(other);
             score++;
+            #region
+            /* 
             //other.gameObject.transform.parent = transform.parent.GetChild(0).transform;
             
             //Debug.Log(other.gameObject.name);
@@ -48,9 +63,8 @@ public class PlayerGameController : MonoBehaviour
             //{
             //    StackList[StackList.Count - 1].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[(StackList.Count - 2)].transform);
             //}
-
-            #region
-            /* BENÝM DENEMEM (Sonuca Ulasilamadi)
+             * 
+             * BENÝM DENEMEM (Sonuca Ulasilamadi)
             score++;
             Cubes.Add(other.gameObject);
             other.gameObject.transform.SetParent(transform);

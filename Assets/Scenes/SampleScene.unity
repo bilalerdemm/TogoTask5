@@ -738,7 +738,6 @@ MonoBehaviour:
   character: {fileID: 543450652402315846}
   myPlayer: {fileID: 919132148212214012}
   speed: 5
-  playerAnim: {fileID: 999769998}
 --- !u!4 &381210191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3105186436036003319, guid: cbdbde7efcc834742892f83074eaa1ca, type: 3}
@@ -4697,11 +4696,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cbf571a068714469aeb342f16f300c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 999769998}
+  start: 0
   StackList: []
   spawnPoint: {fileID: 1765008123}
   isCube: 1
   score: 0
   moveSpeed: 5
+  parent: {fileID: 0}
 --- !u!1001 &3869611750630253912
 PrefabInstance:
   m_ObjectHideFlags: 0

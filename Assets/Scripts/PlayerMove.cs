@@ -9,7 +9,6 @@ public class PlayerMove : MonoBehaviour, IDragHandler
     public GameObject myPlayer;
     private bool start = false;
     public float speed = 5.0f;
-    public Animator playerAnim;
     public static PlayerMove instance;
 
     private void Awake()
@@ -31,15 +30,7 @@ public class PlayerMove : MonoBehaviour, IDragHandler
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            start = true;
-        }
-        if (start == true)
-        {
-            playerAnim.SetBool("isRunning", true);
-            //myPlayer.gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
-        }
+
     }
 
 
