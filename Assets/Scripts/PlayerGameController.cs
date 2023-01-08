@@ -10,10 +10,16 @@ public class PlayerGameController : MonoBehaviour
     public bool isCube = true;
     public int score;
     public float moveSpeed;
+    public Transform parent;
 
     public static PlayerGameController instance;
     private void Awake() => instance = this;
 
+
+    private void Start()
+    {
+        InvokeRepeating("StackListUpdate", .05f, .05f);
+    }
 
     private void Update()
     {
@@ -24,25 +30,24 @@ public class PlayerGameController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Collect"))
         {
-            other.gameObject.transform.parent = transform.parent.GetChild(0).transform;
-
-
-            Debug.Log(other.gameObject.name);
-            //other.gameObject.transform.AddComponent<Rigidbody>();
-
-
-            StackList.Add(other.gameObject);
-            StackList[StackList.Count - 1].transform.position += new Vector3(0, 0, StackList.Count * .5f);
+            AddCubeToList(other);
             score++;
+            //other.gameObject.transform.parent = transform.parent.GetChild(0).transform;
+            
+            //Debug.Log(other.gameObject.name);
+           
+            //StackList.Add(other.gameObject);
+            //StackList[StackList.Count - 1].transform.position += new Vector3(0, 0, StackList.Count * .5f);
+            
 
-            if (StackList.Count == 1)
-            {
-                StackList[0].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
-            }
-            else if (StackList.Count > 1)
-            {
-                StackList[StackList.Count - 1].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[(StackList.Count - 2)].transform);
-            }
+            //if (StackList.Count == 1)
+            //{
+            //    StackList[0].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
+            //}
+            //else if (StackList.Count > 1)
+            //{
+            //    StackList[StackList.Count - 1].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[(StackList.Count - 2)].transform);
+            //}
 
             #region
             /* BENÝM DENEMEM (Sonuca Ulasilamadi)
@@ -85,14 +90,63 @@ public class PlayerGameController : MonoBehaviour
         }
     }
 
+    void StackListUpdate()
+    {
+        for (int i = 0; i < StackList.Count; i++)
+        {
+            if(i == 0)
+            {
+                StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
+                StackList[i].gameObject.transform.position = transform.position + new Vector3(0,0,0.5f);
+                StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x, 
+                                                                         StackList[i].gameObject.transform.position.y, 
+                                                                         transform.position.z + 0.5f);
+            }
+            else
+            {
+                StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[i - 1].transform);
+                StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x,
+                                                                         StackList[i].gameObject.transform.position.y,
+                                                                         StackList[i - 1].transform.position.z + 0.5f);
+
+            }
+        }
+    }
+
 
     IEnumerator CubeRemover()
     {
         yield return new WaitForSeconds(1f);
 
     }
-    public void AddCubeToList()
+    public void AddCubeToList(Collider other)
     {
+        #region
+        /*
+        other.gameObject.transform.parent = transform.parent.GetChild(0).transform;
+        Debug.Log(other.gameObject.name);
+        StackList.Add(other.gameObject);
+        StackList[StackList.Count - 1].transform.position += new Vector3(0, 0, StackList.Count * .5f);
+        */
+        #endregion
+
+        other.transform.parent = parent;
+        StackList.Add(other.gameObject);
+        other.tag = "Collected";
+        StackList[StackList.Count - 1].gameObject.AddComponent<CollectableTrger>();
+        
+        
+
+        //if (StackList.Count == 1)
+        //{
+        //    StackList[0].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
+        //    StackList[StackList.Count - 1].transform.position += new Vector3(0, 0, .5f);
+        //}
+        //else if (StackList.Count > 1)
+        //{
+        //    StackList[StackList.Count - 1].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[(StackList.Count - 2)].transform);
+        //    StackList[StackList.Count - 1].transform.position = StackList[StackList.Count - 2].transform.position + new Vector3(0, 0, .5f);
+        //}
 
     }
 }

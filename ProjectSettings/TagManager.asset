@@ -7,6 +7,7 @@ TagManager:
   - Collect
   - Gate
   - Obstacle
+  - Collected
   layers:
   - Default
   - TransparentFX

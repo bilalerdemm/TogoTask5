@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour, IDragHandler
 {
-    public Transform character, child;
+    public Transform character;
     public GameObject myPlayer;
     private bool start = false;
     public float speed = 5.0f;
