@@ -73,13 +73,13 @@ public class PlayerGameController : MonoBehaviour
             */
             #endregion
         }
-        if (other.gameObject.CompareTag("Obstacle") && score > 0)
-        {
-            score--;
-            Debug.Log("Obstacle Girildi");
-            Destroy(StackList[StackList.Count - 1].gameObject);
-            StackList.RemoveAt(StackList.Count - 1);
-        }
+        //if (other.gameObject.CompareTag("Obstacle") && score > 0)
+        //{
+        //    score--;
+        //    Debug.Log("Obstacle Girildi");
+        //    Destroy(StackList[StackList.Count - 1].gameObject);
+        //    StackList.RemoveAt(StackList.Count - 1);
+        //}
     }
 
     void StackListUpdate()
