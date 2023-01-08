@@ -7,14 +7,9 @@ public class PlayerMove : MonoBehaviour, IDragHandler
 {
     public Transform character;
     public GameObject myPlayer;
-    private bool start = false;
-    public float speed = 5.0f;
     public static PlayerMove instance;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+    private void Awake() => instance = this;
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
@@ -27,11 +22,4 @@ public class PlayerMove : MonoBehaviour, IDragHandler
         child.rotation = rot;
         */
     }
-
-    void Update()
-    {
-
-    }
-
-
 }

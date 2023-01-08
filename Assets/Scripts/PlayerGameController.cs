@@ -73,34 +73,12 @@ public class PlayerGameController : MonoBehaviour
             */
             #endregion
         }
-        if (other.gameObject.CompareTag("Gate") && score > 0)
-        {
-            if (isCube)
-            {
-                for (int i = 0; i < StackList.Count; i++)
-                {
-                    StackList[i].gameObject. GetComponent<MeshRenderer>().enabled = false;
-                    isCube = false;
-                }
-
-            }
-            else
-            {
-                for (int i = 0; i < StackList.Count; i++)
-                {
-                    StackList[i].gameObject.GetComponent<MeshRenderer>().enabled = true;
-                    isCube = true;
-                }
-            }
-        }
-
         if (other.gameObject.CompareTag("Obstacle") && score > 0)
         {
             score--;
             Debug.Log("Obstacle Girildi");
             Destroy(StackList[StackList.Count - 1].gameObject);
             StackList.RemoveAt(StackList.Count - 1);
-            //StartCoroutine(CubeRemover());
         }
     }
 
@@ -127,12 +105,6 @@ public class PlayerGameController : MonoBehaviour
         }
     }
 
-
-    IEnumerator CubeRemover()
-    {
-        yield return new WaitForSeconds(1f);
-
-    }
     public void AddCubeToList(Collider other)
     {
         #region
