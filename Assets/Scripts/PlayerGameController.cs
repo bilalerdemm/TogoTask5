@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerGameController : MonoBehaviour
 {
     public Animator playerAnim;
-    public bool start =false;
+    public bool start = false;
 
     public List<GameObject> StackList = new List<GameObject>();
     public Transform spawnPoint;
@@ -14,7 +14,8 @@ public class PlayerGameController : MonoBehaviour
     public int score;
     public float moveSpeed;
     public Transform parent;
-
+    public bool IsStop = false;
+    public GameObject finish;
     public static PlayerGameController instance;
     private void Awake() => instance = this;
 
@@ -26,16 +27,18 @@ public class PlayerGameController : MonoBehaviour
 
     private void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0))
+        if (!IsStop)
         {
-            start = true;
-        }
-        if (start == true)
-        {
-            playerAnim.SetBool("isRunning", true);
-            transform.parent.transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
-            //myPlayer.gameObject.transform.Translate(0, 0, speed * Time.deltaTime);
+            if (Input.GetMouseButtonDown(0))
+            {
+                start = true;
+            }
+            if (start == true)
+            {
+                playerAnim.SetBool("isRunning", true);
+                transform.parent.transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
+
+            }
         }
     }
 
@@ -84,25 +87,30 @@ public class PlayerGameController : MonoBehaviour
 
     void StackListUpdate()
     {
-        for (int i = 0; i < StackList.Count; i++)
+        if (StackList.Count>0)
         {
-            if(i == 0)
+            for (int i = 0; i < StackList.Count; i++)
             {
-                StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
-                StackList[i].gameObject.transform.position = transform.position + new Vector3(0,0,0.5f);
-                StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x, 
-                                                                         StackList[i].gameObject.transform.position.y, 
-                                                                         transform.position.z + 0.5f);
-            }
-            else
-            {
-                StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[i - 1].transform);
-                StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x,
-                                                                         StackList[i].gameObject.transform.position.y,
-                                                                         StackList[i - 1].transform.position.z + 0.5f);
+                if (i == 0)
+                {
+                    StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
+                    StackList[i].gameObject.transform.position = transform.position + new Vector3(0, 0, 0.5f);
+                    StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x,
+                                                                             StackList[i].gameObject.transform.position.y + .35f,
+                                                                             transform.position.z + 0.5f);
+                }
+                else
+                {
+                    StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(StackList[i - 1].transform);
+                    StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x,
+                                                                             StackList[i].gameObject.transform.position.y,
+                                                                             StackList[i - 1].transform.position.z + 0.5f);
 
+                }
             }
         }
+       
+
     }
 
     public void AddCubeToList(Collider other)
@@ -120,8 +128,8 @@ public class PlayerGameController : MonoBehaviour
         StackList.Add(other.gameObject);
         other.tag = "Collected";
         StackList[StackList.Count - 1].gameObject.AddComponent<CollectableTrger>();
-        
-        
+
+
 
         //if (StackList.Count == 1)
         //{
