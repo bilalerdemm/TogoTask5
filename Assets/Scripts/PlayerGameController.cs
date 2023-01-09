@@ -73,16 +73,18 @@ public class PlayerGameController : MonoBehaviour
             other.gameObject.transform.SetParent(transform);
             spawnPoint.position = new Vector3 (spawnPoint.position.x,spawnPoint.position.y, Cubes[Cubes.Count - 1].transform.position.z);
             //other.gameObject.transform.position = spawnPoint.position + new Vector3(0, 0, 0.5f);
-            */
-            #endregion
-        }
-        //if (other.gameObject.CompareTag("Obstacle") && score > 0)
+
+                    //if (other.gameObject.CompareTag("Obstacle") && score > 0)
         //{
         //    score--;
         //    Debug.Log("Obstacle Girildi");
         //    Destroy(StackList[StackList.Count - 1].gameObject);
         //    StackList.RemoveAt(StackList.Count - 1);
         //}
+            */
+            #endregion
+        }
+
     }
 
     void StackListUpdate()
@@ -96,7 +98,7 @@ public class PlayerGameController : MonoBehaviour
                     StackList[i].gameObject.GetComponent<SmoothDamp>().SetLeadTransform(transform);
                     StackList[i].gameObject.transform.position = transform.position + new Vector3(0, 0, 0.5f);
                     StackList[i].gameObject.transform.position = new Vector3(StackList[i].gameObject.transform.position.x,
-                                                                             StackList[i].gameObject.transform.position.y + .35f,
+                                                                             StackList[i].gameObject.transform.position.y + .28f,
                                                                              transform.position.z + 0.5f);
                 }
                 else
