@@ -6069,7 +6069,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.17637967, y: 0.005017446, z: -0.0008990323, w: -0.9843091}
+  m_LocalRotation: {x: 0.17638043, y: 0, z: 0, w: 0.98432213}
   m_LocalPosition: {x: 0, y: 6.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6916,7 +6916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093032890}
-  m_LocalRotation: {x: -0.17637967, y: 0.005017446, z: -0.0008990323, w: -0.9843091}
+  m_LocalRotation: {x: 0.17638043, y: 0, z: 0, w: 0.98432213}
   m_LocalPosition: {x: 0, y: 6.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6924,7 +6924,7 @@ Transform:
   - {fileID: 1255699049}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.318, y: 0, z: 0}
 --- !u!1 &1150949890
 GameObject:
   m_ObjectHideFlags: 0
@@ -8454,6 +8454,16 @@ MonoBehaviour:
   score: 0
   "\u0131nputPanel": {fileID: 357098732}
   finalCubeSpawn: {fileID: 1056490742}
+  cineCam: {fileID: 1093032890}
+  angles:
+  - {x: 18, y: 0, z: 0}
+  - {x: 14, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: 8, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  lerpTime: 0.5
+  time: 0.75
 --- !u!65 &1420708998
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -7,6 +7,38 @@ public class Finish : MonoBehaviour
     public int score = 0;
     public GameObject ýnputPanel;
     public Transform finalCubeSpawn;
+    public GameObject cineCam;
+
+    [SerializeField] private Vector3[] angles;
+    [SerializeField] [Range(0f,10f)] private float lerpTime;
+    [SerializeField] private float time;
+    private float currentTime;
+    private int angleIndex;
+
+
+    private void Update()
+    {
+        if (transform.childCount > 10)
+        {
+            cineCam.transform.rotation = Quaternion.Slerp(cineCam.transform.rotation, Quaternion.Euler(angles[angleIndex]), lerpTime * Time.deltaTime);
+        }
+
+        if (currentTime <= 0)
+        {
+            currentTime = time;
+            angleIndex++;
+        }
+        else
+        {
+            currentTime -= Time.deltaTime;
+        }
+        if (angleIndex >= angles.Length)
+        {
+            angleIndex = 0;
+        }
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
