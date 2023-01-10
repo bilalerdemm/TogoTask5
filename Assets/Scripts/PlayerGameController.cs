@@ -47,7 +47,7 @@ public class PlayerGameController : MonoBehaviour
         if (other.gameObject.CompareTag("Collect"))
         {
             AddCubeToList(other);
-            score++;
+            //score++;
             #region
             /* 
             //other.gameObject.transform.parent = transform.parent.GetChild(0).transform;

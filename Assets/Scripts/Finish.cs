@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Finish : MonoBehaviour
 {
-    public int score = 0;
+    public int score;
     public GameObject ýnputPanel, confetti;
     public Transform finalCubeSpawn;
     public GameObject cineCam;
@@ -15,7 +16,9 @@ public class Finish : MonoBehaviour
     private float currentTime;
     private int angleIndex;
 
-
+    public TextMeshProUGUI scoreText;
+    public Animator textAnimator;
+    public GameObject textObject;
     private void Update()
     {
         if (transform.childCount > 10)
@@ -36,6 +39,13 @@ public class Finish : MonoBehaviour
         {
             angleIndex = 0;
         }
+        if (transform.childCount > 3)
+        {
+            
+            textObject.gameObject.SetActive(true);
+            scoreText.text = "Score:" + score;
+            textAnimator.SetBool("isBounce", true);
+        }
     }
 
 
@@ -43,6 +53,8 @@ public class Finish : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            score += score;
+
             Debug.Log("aaa");
             confetti.SetActive(true);
 
@@ -55,6 +67,7 @@ public class Finish : MonoBehaviour
         {
             Debug.Log("Finishe cube geldi");
             score += 5;
+            //StartCoroutine(CubeScore());
             PlayerGameController.instance.StackList.Remove(other.gameObject);
             Destroy(other.gameObject.GetComponent<SmoothDamp>());
             other.gameObject.transform.parent = transform;
@@ -66,6 +79,7 @@ public class Finish : MonoBehaviour
         {
             Debug.Log("Finishe sphire geldi");
             score += 10;
+            //StartCoroutine(SphireScore());
             PlayerGameController.instance.StackList.Remove(other.gameObject);
             Destroy(other.gameObject.GetComponent<SmoothDamp>());
             other.gameObject.transform.parent = transform;
@@ -73,5 +87,14 @@ public class Finish : MonoBehaviour
             finalCubeSpawn.transform.position = new Vector3(finalCubeSpawn.transform.position.x, finalCubeSpawn.transform.position.y + .5f, finalCubeSpawn.transform.position.z);
 
         }
+    }
+    IEnumerator CubeScore(){
+        yield return new WaitForSeconds(3);
+        score += 5;
+    }
+    IEnumerator SphireScore()
+    {
+        yield return new WaitForSeconds(3);
+        score += 10;
     }
 }
