@@ -5,7 +5,7 @@ using UnityEngine;
 public class Finish : MonoBehaviour
 {
     public int score = 0;
-    public GameObject ýnputPanel;
+    public GameObject ýnputPanel, confetti;
     public Transform finalCubeSpawn;
     public GameObject cineCam;
 
@@ -44,7 +44,8 @@ public class Finish : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("aaa");
-            
+            confetti.SetActive(true);
+
             ýnputPanel.SetActive(false);
             PlayerGameController.instance.IsStop = true;
             PlayerGameController.instance.start = false;
