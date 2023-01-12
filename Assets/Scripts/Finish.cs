@@ -19,6 +19,8 @@ public class Finish : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public Animator textAnimator;
     public GameObject textObject;
+
+    public GameObject winPanel;
     private void Update()
     {
         if (transform.childCount > 10)
@@ -62,6 +64,8 @@ public class Finish : MonoBehaviour
             PlayerGameController.instance.IsStop = true;
             PlayerGameController.instance.start = false;
             PlayerGameController.instance.playerAnim.SetBool("isRunning", false);
+
+            winPanel.SetActive(true);
         }
         if (other.gameObject.CompareTag("Collected") && other.gameObject.GetComponent<MeshRenderer>().enabled == true)
         {
